@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  hello-mariadb:
+    image: mariadb
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MARIADB_DATABASE: hello
+      MARIADB_USER: hello
+      MARIADB_PASSWORD: hello
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
+
+  hello-app:
+    image: hello-app
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - hello-mariadb
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:mariadb://hello-mariadb/hello'
+    entrypoint: ['./wait-for-it.sh', '-t', '120', 'hello-mariadb:3306', '--', 'java', 'org.springframework.boot.loader.JarLauncher']
