@@ -13,8 +13,8 @@ RUN java -Djarmode=layertools -jar hello.jar extract
 FROM eclipse-temurin:17
 WORKDIR application
 
-ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh .
-RUN chmod +x ./wait-for-it.sh
+# ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh .
+# RUN chmod +x ./wait-for-it.sh
 
 COPY --from=builder application/dependencies/ ./
 COPY --from=builder application/spring-boot-loader/ ./
