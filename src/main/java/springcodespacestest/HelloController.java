@@ -16,17 +16,17 @@ public class HelloController {
     private HelloService service;
 
     @GetMapping
-    public Hello getHello() {
+    public HelloDto getHello() {
         return service.getHello();
     }
 
     @PostMapping
-    public Hello createHello() {
+    public HelloDto createHello() {
         return service.createHello();
     }
 
     @GetMapping("/all")
-    public List<Hello> getAllHello() {
+    public List<HelloDto> getAllHello() {
         return service.getHellos();
     }
 }

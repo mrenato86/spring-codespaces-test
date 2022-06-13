@@ -1,13 +1,20 @@
 package springcodespacestest;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringCodespacesTestApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringCodespacesTestApplication.class, args);
+    }
+
+    @Bean
+    public ModelMapper getModelMapper(){
+        return new ModelMapper();
     }
 
 /*  Wait for database to initialize - example

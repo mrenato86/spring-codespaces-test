@@ -1,27 +1,30 @@
 package springcodespacestest;
 
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class HelloService {
 
     private final HelloRepository repository;
+    private final ModelMapper modelmapper;
 
-    public HelloService(HelloRepository repository) {
-        this.repository = repository;
+    public HelloDto getHello() {
+        return modelmapper.map(new Hello(1L, "Hello CodeSpaces"), HelloDto.class);
     }
 
-    public Hello getHello() {
-        return new Hello(1L,"Hello CodeSpaces");
+    public HelloDto createHello() {
+        return modelmapper.map(repository.save(new Hello("Hello Codespaces")), HelloDto.class);
     }
 
-    public Hello createHello(){
-        return repository.save(new Hello("Hello Codespaces"));
-    }
-
-    public List<Hello> getHellos(){
-        return repository.findAll();
+    public List<HelloDto> getHellos() {
+        return repository.findAll().stream()
+                .map(h -> modelmapper.map(h, HelloDto.class))
+                .collect(Collectors.toList());
     }
 }
