@@ -1,12 +1,15 @@
 package springcodespacestest;
 
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/hello")
@@ -26,7 +29,7 @@ public class HelloController {
     }
 
     @GetMapping("/all")
-    public List<HelloDto> getAllHello() {
-        return service.getHellos();
+    public List<HelloDto> getAllHello(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<LocalDate> less) {
+        return service.getHellos(less);
     }
 }
