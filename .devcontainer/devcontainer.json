@@ -31,7 +31,8 @@
 				"vscjava.vscode-java-pack",
 				"GabrielBB.vscode-lombok",
 				"Pivotal.vscode-boot-dev-pack",
-				"humao.rest-client"
+				"humao.rest-client",
+				"redhat.fabric8-analytics"
 			]
 		}
 	},
